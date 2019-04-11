@@ -1,0 +1,82 @@
+<html>
+<head><title>OTP</title></head>
+<body>
+<center><br><br><br><br><br><br><br>
+PHONE NUMBER: <input type='text' id='phone number' value='' title='Enter your 10 digit mobile number'  maxlength='10'> &nbsp; &nbsp; 
+<input type='button' id='gen otp' value='Generate OTP' onclick='call()'> <br><br><br><br>
+OTP: <input type='text' id='otp' value='' disabled onkeypress='verotp()'><br><br><br><br>
+<input type='button' id='verify1' value='Verify' onclick='verfication()' disabled>
+
+<script>
+var otpno;
+count=2;
+var times=3;
+function call()
+{
+var s=document.getElementById('phone number').value;
+if(s.length==10)
+{
+
+	if(isNaN(s))
+		{
+			alert('Invalid Phone number')
+		}
+	else
+		{
+			count--;
+			otpno=Math.floor(Math.random()*10000);
+			alert("An OTP will be sent to "+s[0]+s[1]+"******"+s[8]+s[9])
+			alert("Your OTP is "+ otpno)
+			document.getElementById('otp').disabled=false;
+		}
+}
+
+
+else
+{
+alert('Phone number must be 10 digit')
+document.getElementById('otp').disabled=true;
+}
+}
+
+function verotp()
+{
+	document.getElementById('verify1').disabled=false;
+}
+
+
+function verfication()
+{
+var ver=document.getElementById('otp').value;
+if(ver==otpno)
+{
+	alert('Registered Successfully')
+}
+else
+{
+	times--;
+	alert('Invalid OTP')
+}
+if(times==0 && count==0)
+{
+	alert('No more chances. Please contact nearby branch')
+	document.getElementById('gen otp').disabled=true;
+	document.getElementById('otp').disabled=true;
+	document.getElementById('verify1').disabled=true;
+}
+else 
+{
+if(times==0)
+{
+	times=3;
+	alert('No more chances. You can generate one more time')
+	document.getElementById('otp').disabled=true;
+	document.getElementById('verify1').disabled=true;
+}
+}
+}
+</script>
+</center>
+</body>
+</html>
+
